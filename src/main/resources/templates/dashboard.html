@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet"  th:href="@{/CSS/dashboard.css}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <title>Documenst</title>
+</head>
+<body>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <div class="layout">
+
+    <nav>
+
+      <div class="picture">
+        <img id="idpicture" th:src="@{/IMAGES/logo-removebg-preview.png}" alt="">
+      </div>
+
+      <ul>
+
+        <li id="idhome"><i class="fas fa-home"></i><span>Home</span></li>
+        <li id="iddoctor"><a class="clickme" onclick="history.go(0)"  th:href="@{/lister} "><i class="fas fa-user-md"></i><span>Doctor</span></a></li>
+        <li id="idmedicament"><a class="clickme" onclick="history.go(0)"  th:href="@{/listermedic} "><i class="fas fa-notes-medical"></i><span>Medicament</span></a></li>
+        <li id="idconsultaion"><a class="clickme" th:href="@{/listercon}"><i class="fas fa-book-medical"></i><span>Consultaion</span></a></li>
+        <li id="idpatient"><a class="clickme" th:href="@{/listerpa}"><i class="fas fa-procedures"></i><span>Patients</span></a></li>
+        
+
+      </ul>
+
+    </nav>
+      
+      
+    <main>
+
+      <header>
+        <span><i class="fa fa-bars" id="bars"></i></span>
+
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+            Account
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" id="idsettings">settings</a>
+            <form class="dropdown-item" th:action="@{/logout}" method="post">
+		        <input type="submit" id="idlogout" value="Logout" />
+		    </form>
+          </div>
+        </div>
+      </header>
+      <div class="chart">
+        <canvas id="chart"></canvas>
+      </div>
+
+      <div class="doctor">
+
+        <div class="btndoctor">
+          <button id="adddoctor"> <i class="fas fa-plus"></i> New </button>
+          <button id="seedoctor"> <i class="fas fa-eye"></i> All</button>
+          <div class="search"><i class="fas fa-search"></i> <input type="text" id="searchinput" placeholder="Searche for doctor"></div>
+        </div>
+
+        <div class="adddoctor">
+          <form th:action="@{/saveme}" th:object=${medecin1} method="POST">
+            <input th:field="*{nom}" type="text" name="mname" placeholder="Nom" />
+            <input th:field="*{prenom}" type="text" name="mprenom" placeholder="Prenom" />
+            <input th:field="*{adresse}"type="text" name="madr" placeholder="Addresse" />
+            <input th:field="*{telephone}"type="text" name="mtelephone" placeholder="tel" />
+             <input  th:field="*{email}"type="email" name="em" placeholder="email" />
+              <input th:field="*{password}" type="password" name="passw" placeholder="password" />
+	            <select  th:field="*{status}"id="h">
+	              <option value="disponible">disponible</option>
+	              <option value="non disponible">non disponible</option>
+	            </select>
+            <button onclick="save()" type="submit">Enregistrer</button>
+          </form>
+        </div>
+
+        <div class="listdoctor">
+
+          <div class="tabledoctor">
+            <table id="table">
+            <thead>
+              <tr>
+              <th hidden>id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Addresse</th>
+                <th>telephone</th>
+                <th>action</th>
+              </tr>
+            </thead>
+          <tbody>
+              
+              <tr th:each="medecin:${medecin}">
+                <td id="ios" th:text="${medecin.id}" hidden></td>
+                <td th:text="${medecin.nom}"></td>
+                <td th:text="${medecin.prenom}"></td>
+                <td th:text="${medecin.adresse}"></td>
+                <td th:text="${medecin.telephone}"></td>
+                <td>
+                  <button class="medd1" id='cvc'>
+                  <a class ="ook"  th:href="${medecin.id}"><i class="fas fa-eye"></i></a>
+                  </button>
+                
+                  <button class="medd" type="button">
+                  <a class="ooo"th:href="@{findone/(id=${medecin.id})}"><i class="fas fa-edit"></i></a>
+                  </button>
+                  <button type="button" >
+                 <a th:onclick="eliminer([[${medecin.id}]])"><i class="fas fa-trash"></i></a>
+                </button>
+                </td>
+              </tr>
+          </tbody>
+              
+          </table>
+         </div>
+
+          <div class="paginate" aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+       
+
+      
+
+
+
+
+
+
+      
+      <div class="medicament">
+
+        <div class="btnmedicament">
+          <button id="addmedicament"> <i class="fas fa-plus"></i> New </button>
+          <button id="seemedicament"> <i class="fas fa-eye"></i> All</button>
+          <div class="search"><i class="fas fa-search"></i> <input type="text" id="searchmedicament" placeholder="Searche for doctor"></div>
+        </div>
+
+        <div class="addmedicament">
+            <form th:action="@{/savemed}" th:object=${medicament1} method="POST">
+            <input th:field="*{nom}" type="text" name="mname" placeholder="Nom" />
+            <input th:field="*{laboratoire}" type="text" name="mprenom" placeholder="Laboratoire" />
+            <input th:field="*{maladie}"type="text" name="mtelephone" placeholder="Maladie" />
+            <button onclick="save2()" type="submit">Enregistrer</button>
+          </form>
+        </div>
+
+        <div class="listmedicament">
+
+         <div class="tablemedicament">
+              <table id="tablemedicament">
+                <tr>
+                  <th>Name</th>
+                  <th>laboratory</th>
+                  <th>sickness</th>
+                  <th>action</th>
+                </tr>
+                  <tbody>
+              
+              <tr th:each="medicament:${medicament}">
+                <td th:text="${medicament.nom}"></td>
+                <td th:text="${medicament.laboratoire}"></td>
+                <td th:text="${medicament.maladie}"></td>
+                
+                <td>
+                  <button class="mohi" type="button"> <a class ="bod"  th:href="${medicament.id}"><i class="fas fa-eye"></i></a></button>
+                
+                  <button  class="medii" type="button"><a class="bov"th:href="@{findM/(id=${medicament.id})}"><i class="fas fa-edit"></i></a></button>
+                  <button type="button" >
+                 <a th:onclick="eliminemedi([[${medicament.id}]])"><i class="fas fa-trash"></i></a>
+                </button>
+                </td>
+              </tr>
+          </tbody>
+
+                
+              
+              </table>
+         </div>
+
+          <div class="paginate" aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+
+
+
+
+
+
+      <div class="Consultaion">
+
+        <div class="btnConsultaion">
+          <button id="addConsultaion"> <i class="fas fa-plus"></i> New </button>
+          <button id="seeConsultaion"> <i class="fas fa-eye"></i> All</button>
+          <div class="search"><i class="fas fa-search"></i> <input type="text" id="searchConsultaion" placeholder="Searche for Consultaion"></div>
+        </div>
+
+        <div class="addConsultaion">
+          <form  th:action="@{/savecons}" th:object=${consultation1} method="POST">
+           <div class="form-group col-md-5">
+                      <label for="inputState" class="x">Medecin</label>
+             <select id="cp" name="cp" class="form-control">
+                      
+                      </select>
+           </div>
+            <div class="form-group col-md-5">
+                      <label for="inputState"class="x">Patient</label>
+                       <select id="cd" name="cd" class="form-control">
+                      
+                      </select>
+            </div>
+             <div class="form-group col-md-5">
+                      <label for="inputState" class="x">Medicament</label>
+                       <select id="cs" name="cs" class="form-control">
+                      
+                      </select>
+             </div>
+            <button type="submit">Enregistrer</button>
+          </form>
+        </div>
+ <style>
+	 .x{
+		color:white;
+		font-family:italic;
+	}
+ </style>
+        <div class="listConsultaion">
+
+         <div class="tableConsultaion">
+              <table id="tableConsultaion">
+                <tr>
+                  <th>Nom doctor </th>
+                  <th>nom patient</th>
+                  <th>medicament</th>
+                  <th>action</th>
+                </tr>
+                <tbody>
+                   <tr th:each="consultation:${consultation}">
+                <td th:text="${consultation.id_medcin}"></td>
+                <td th:text="${consultation.id_medicament}"></td>
+                <td th:text="${consultation.id_patient}"></td>
+                 
+              
+                </tr></tbody>
+
+                
+
+              </table>
+         </div>
+
+          <div class="paginate" aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+      <div class="patient">
+
+        <div class="btnpatient">
+          <button id="addpatient"> <i class="fas fa-plus"></i> New </button>
+          <button id="seepatient"> <i class="fas fa-eye"></i> All</button>
+          <div class="search"><i class="fas fa-search"></i> <input type="text" id="searchpatient" placeholder="Searche for doctor"></div>
+        </div>
+
+        <div class="addpatient">
+			    <form th:action="@{/savepa}" th:object=${patient1} method="POST">
+            <input th:field="*{nom}" type="text" name="mname" placeholder="Nom" />
+            <input th:field="*{prenom}" type="text" name="mprenom" placeholder="Prenom" />
+            <input th:field="*{adresse}"type="text" name="madr" placeholder="Addresse" />
+            <input th:field="*{telephone}"type="text" name="mtelephone" placeholder="tel" />
+             <input  th:field="*{email}"type="email" name="em" placeholder="email" />
+              <input th:field="*{password}" type="password" name="passw" placeholder="password" />
+			            <button onclick="save1()" type="submit">Enregistrer</button>
+			  </form>
+        </div>
+
+        <div class="listpatient">
+
+         <div class="tablepatient">
+              <table id="tablepatient">
+              <thead>
+                <tr>
+                  <th>Nom</th>
+                  <th>prenom</th>
+                  <th>adress</th>
+                  <th>phone</th>
+                  <th>action</th>
+                </tr>
+              </thead>
+                 <tbody>
+              
+              <tr th:each="patient:${patient}">
+                <td th:text="${patient.nom}"></td>
+                <td th:text="${patient.prenom}"></td>
+                <td th:text="${patient.adresse}"></td>
+                <td th:text="${patient.telephone}"></td>
+                <td> 
+                  <button class="moh" type="button"> <a class ="ood"  th:href="${patient.id}"><i class="fas fa-eye"></i></a></button>
+                
+                  <button class="patt" type="button"><a class="oov"th:href="@{findp/(id=${patient.id})}"><i class="fas fa-edit"></i></a></button>
+                  <button type="button" >
+                 <a th:onclick="eliminepat([[${patient.id}]])"><i class="fas fa-trash"></i></a>
+                </button>
+                </td>
+              </tr>
+          </tbody>
+               
+              </table>
+         </div>
+
+          <div class="paginate" aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+<div class="settings">
+        <div class="btnsettings">
+          <button id="addcode"> <i class="fas fa-plus"></i> get code security </button>
+        </div>
+
+        <div class="addsettings">
+          <form action="" method="post">
+            <input type="text" name="" required placeholder="Nom">
+            <input type="text" name="" required placeholder="Prenom">
+            <input type="password" name="" required placeholder="password">
+            <input type="password" name="" required placeholder="retape password">
+            <input type="text" min="4" max="4" placeholder="1234" required id="inputcode" >
+            <button type="submit">modifier</button>
+          </form>
+        </div>
+
+        <div class="listsettings">
+
+         <div class="tablesettings">
+              <table id="tablesettings">
+                <tr>
+                  <th>Nom</th>
+                  <th>email</th>
+                </tr>
+
+                
+                <tr>
+                  <td>salah</td>
+                  <td>zafati</td>
+                </tr>
+
+      
+
+              </table>
+         </div>
+
+          
+
+        </div>
+
+
+
+      </div>
+
+
+
+
+
+    </main>
+  
+  </div>
+    
+
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="width: 100%; display: flex;justify-content: flex-end;">
+        <button type="button" class="close btn btn-danger" data-dismiss="modal" aria-label="Close">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        vous etes sur que vou voulez supprimer
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success">delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade bd-example-modal-lg" id="eye13" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+  <div class="modal-body">
+   		<table class="table table-bordered table-dark table-responsive">
+			  <thead>
+			    <tr>
+			    	   <th scope="col">name</th>
+     				   <th scope="col">laboratory</th>
+				       <th scope="col">sickness</th>
+				     
+				     
+     			</tr>
+			  </thead>
+			  <tbody>
+			  <tr>
+     
+    				 
+				      <td><span id="n1"></span></td>
+				      <td><span id="n2"></span></td>
+				      <td><span id="n3"></span></td>
+				     
+				      
+      
+    		</tr>
+  
+			  </tbody>
+			</table>
+  		</div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="modalmedicament" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="width: 100%; display: flex;justify-content: flex-end;">
+        <button type="button" class="close btn btn-danger" data-dismiss="modal" aria-label="Close">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        vous etes sur que vou voulez supprimer ce medicament
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger">delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade bd-example-modal-lg" id="eye12" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+  <div class="modal-body">
+   		<table class="table table-bordered table-dark table-responsive">
+			  <thead>
+			    <tr>
+			    	   <th scope="col">last name</th>
+     				   <th scope="col">first name</th>
+				       <th scope="col">adress</th>
+				       <th scope="col">phone</th>
+				       <th scope="col">email</th>
+				     
+     			</tr>
+			  </thead>
+			  <tbody>
+			  <tr>
+     
+    				 
+				      <td><span id="tpat"></span></td>
+				      <td><span id="tpat1"></span></td>
+				      <td><span id="tpat2"></span></td>
+				      <td><span id="tpat3"></span></td>
+				      <td><span id="tpat4"></span></td>
+				      
+      
+    		</tr>
+  
+			  </tbody>
+			</table>
+  		</div>
+    </div>
+  </div>
+</div>
+<div class="modal" id="exampleModalmedi"tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <form class="myform"  th:action="@{/savemed}"  method="POST">
+  			 <div class="form-row">
+    <div class="col">
+            <input  type="text" id="nm"  />
+    </div>
+    <div class="col">
+            <input  type="text" id="labo" />
+  			 </div>
+  			 </div>
+  			  <div class="form-row">
+    <div class="col">
+            <input type="text" id="mal"  />
+    </div>
+  			  </div>
+  			
+  			 
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button"  class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" id="exampleModalpa"tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <form class="myform"  th:action="@{/savepa}"  method="POST">
+  			 <div class="form-row">
+    <div class="col">
+            <input  type="text" id="name2"  />
+    </div>
+    <div class="col">
+            <input  type="text" id="prenom2" />
+  			 </div>
+  			 </div>
+  			  <div class="form-row">
+    <div class="col">
+            <input type="text" id="adr2"  />
+    </div>
+    <div class="col">
+            <input type="text" id="tel2" />
+  			  </div>
+  			  </div>
+  			   <div class="form-row">
+    <div class="col">
+             <input  type="email" id="em2"/>
+    </div>
+      </div>
+  			 
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button"  class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal" id="exampleModalmo"tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <form class="myform"  th:action="@{/saveme}"  method="POST">
+  			 <div class="form-row">
+    <div class="col">
+            <input  type="text" id="name1"  />
+    </div>
+    <div class="col">
+            <input  type="text" id="prenom1" />
+  			 </div>
+  			 </div>
+  			  <div class="form-row">
+    <div class="col">
+            <input type="text" id="adr1"  />
+    </div>
+    <div class="col">
+            <input type="text" id="tel1" />
+  			  </div>
+  			  </div>
+  			   <div class="form-row">
+    <div class="col">
+             <input  type="email" id="em1"/>
+    </div>
+    <div class="col">
+              <!--<input hi type="password" name="passw" placeholder="password" />-->
+	            <select  id="h1">
+	              <option value="disponible">disponible</option>
+	              <option value="non disponible">non disponible</option>
+	            </select>
+  			   </div>  </div>
+  			   <button type="submit"  class="btn btn-primary">Save changes</button>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button"  class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+ 
+    .modal-body {
+  overflow-x: auto;
+}
+input[name=t] {
+  color:white;
+}
+</style>
+<div class="modal fade bd-example-modal-lg" id="eye11" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+  <div class="modal-body">
+   		<table class="table table-bordered table-dark table-responsive">
+			  <thead>
+			    <tr>
+			    	   <th scope="col">last name</th>
+     				   <th scope="col">first name</th>
+				       <th scope="col">adress</th>
+				       <th scope="col">phone</th>
+				       <th scope="col">email</th>
+				       <th scope="col">status</th>
+     			</tr>
+			  </thead>
+			  <tbody>
+			  <tr>
+     
+    				 
+				      <td><span id="tname"></span></td>
+				      <td><span id="tprenom"></span></td>
+				      <td><span id="tadresse"></span></td>
+				      <td><span id="ttel"></span></td>
+				      <td><span id="temail"></span></td>
+				      <td scope="row"><span id="tstat"></span></td>
+      
+    		</tr>
+  
+			  </tbody>
+			</table>
+  </div>
+  
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script th:src="@{/JS/jquery-3.6.0.min.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script th:src="@{/JS/dashboard.js}"></script>
+<script th:src="@{/JS/fonction.js}"></script>
+<script th:src="@{/JS/main.js}"></script>
+<script th:src="@{/JS/tb.js}"></script>
+</body>
+</html>

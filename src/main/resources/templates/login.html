@@ -1,0 +1,40 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  th:href="@{/CSS/bootstrap.min.css}">
+    <link rel="stylesheet"  th:href="@{/CSS/all.min.css}">
+    <link rel="stylesheet"  th:href="@{/CSS/style.css}">
+    <title>Login</title>
+</head>
+<body>
+    <div class="layout">
+        <div class="login">
+           <h1>Authentification</h1>
+           <div class="logclass">
+               <div class="picture">
+               		<img id="image" th:src="@{/IMAGES/image.jpg}">
+               </div>
+               <div class="formlog">
+                    <form th:action="@{/login}" th:object="${user}" method="post">
+                        <div class="loginput">
+                            <span>Email</span>
+                            <input type="email" placeholder="Entrer Your Email" th:field="*{email}">
+                        </div>
+                        <div class="loginput">
+                            <span>Password</span>
+                            <input type="password" placeholder="password" th:field="*{password}">
+                        </div>
+                        <button type="submit">valider</button>
+                    </form>
+               </div>
+           </div>
+        </div>
+    </div>
+	<script th:src="@{/JS/bootstrap.bundle.min.js}"></script>
+	<script th:src="@{/JS/jquery-3.6.0.min.js}"></script>
+	<script th:src="@{/JS/index.js}"></script>
+</body>
+</html>

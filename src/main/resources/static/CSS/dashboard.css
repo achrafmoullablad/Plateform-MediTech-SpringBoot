@@ -1,0 +1,918 @@
+html,body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    overflow-x: hidden;
+    font-family: cursive;
+}
+
+.layout{
+    width: 100%;
+    height: 100%;
+    display: flex;  
+    background-image: url("../IMAGES/pexels-pixabay-263201.jpg"); 
+    background-position: center;
+    background-size: cover;
+    background-repeat:no-repeat ;
+
+}
+
+.layout nav{
+    transition: 1s;
+    width: 18%;
+    height: 100%;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    
+}
+
+.layout nav .picture{
+    margin-top: 5px;
+    width: 98%;
+    height: auto;
+    border-radius: 5px;
+    text-align: center;
+
+}
+
+.layout nav .picture img{
+    margin-top:7px ;
+    width: 100%;
+    height: 100px;
+    border-radius: 5px;
+    object-fit: fill;
+    margin-bottom:12px;
+    cursor: pointer;
+    
+}
+
+.layout nav ul{
+    list-style: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.layout nav li{
+   
+    width: 100%;
+    margin: 0 0 12px 0;
+    padding-left: 16px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    border-radius: 1px;
+    font-size: 22px;
+    color: rgb(5, 5, 51);
+    cursor: pointer;
+    
+}
+.layout nav li a{
+   
+   
+    color: rgb(5, 5, 51);
+    cursor: pointer;
+    text-decoration: none;
+    
+    
+}
+
+
+.layout nav li span{
+   
+   margin-left: 15px;
+}
+
+.layout nav li:hover{
+    background-color: rgb(5, 5, 51);
+    color:#FFF;
+}
+.layout nav li a:hover{
+    
+    color:#FFF;
+}
+.layout nav.width{
+    width: 4%;
+    transition: 1s;
+
+}
+
+.layout main.width{
+    width: 96%;
+    transition: 1s;
+}
+
+.layout nav.width .picture{
+  display: none;
+
+}
+
+.layout nav.width ul{
+    margin-top: 120px;
+  
+}
+
+.layout nav.width ul li span{
+    display: none;
+  
+}
+
+.layout main{
+    transition: 1s;
+    width: 82%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.layout main header{
+    display: flex;
+    width: 100%;
+    min-height: 60px;
+    height: 8%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.layout main header span{
+  margin-left: 20px;
+  font-size: 25px;
+  color: rgb(5, 5, 51);
+  cursor: pointer;
+}
+
+
+
+.layout main header .dropdown{
+    margin-right:20px ;
+}
+
+.layout main header .dropdown button {
+    background-color: rgb(5, 5, 51);
+    color: #FFF;
+}
+
+.layout main header .dropdown button:focus {
+   box-shadow: none;
+}
+
+
+.layout main header .dropdown .dropdown-menu {
+    background-color: rgb(5, 5, 51);
+    padding: 0;
+    margin-right: 20px;
+
+}
+
+.layout main header .dropdown .dropdown-menu  a {
+    color: #FFF;
+}
+
+.layout main header .dropdown .dropdown-menu  a:hover {
+    color: rgb(5, 5, 51);
+}
+
+
+
+.layout main .chart{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 84%;
+    background-color: rgb(34, 21, 56,0.9);
+    border-radius: 5px;
+    margin-top: 20px;
+ 
+
+}
+.layout main .chart canvas{
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.layout main .doctor{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    height: 84%;
+    background-color: rgb(34, 21, 56,0.9);
+    border-radius: 5px;
+    margin-top: 20px;
+   display: none;
+}
+
+.layout main .doctor .btndoctor{
+    width: 100%;
+    display: flex;
+    height: 60px ;
+    align-items: center;
+}
+
+.layout main .doctor .btndoctor button{
+    width: 30%;
+    height: 40px ;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(10,10,91);
+    margin-left: 20px;
+    
+}
+
+.layout main .doctor .btndoctor button i{
+    margin-right: 10px;
+}
+
+.layout main .doctor .search{
+    width: 70%;
+    height: 40px ;
+    margin-left: 20px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    color: rgba(10,10,91,1);
+}
+.layout main .doctor .search input{
+    width: 100%;
+    padding-left: 33px;
+    outline: none;
+    border-radius: 7px;
+}
+.layout main .doctor .search i{
+    position: absolute;
+    font-size: 20px;
+    top: 8px;
+    left: 10px;
+    
+}
+
+
+.layout main .doctor .adddoctor{
+    width: 100%;
+    height:80% ;
+    margin-top: 10px;
+    display: none;
+}
+
+.layout main .doctor .adddoctor form{
+    width: 100%;
+    height:100% ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.layout main .doctor .adddoctor form input{
+    width: 80%;
+    height:50px ;
+    margin-bottom: 20px;
+    outline: none;
+    padding-left: 20px;
+    border-radius: 7px;
+}
+
+.layout main .doctor .adddoctor form select{
+    width: 80%;
+    height:50px ;
+    margin-bottom: 20px;
+    outline: none;
+    padding-left: 20px;
+    border-radius: 7px;
+}
+
+.layout main .doctor .adddoctor form button{
+    width: 270px;
+    height:50px ;
+    font-size: 20px;
+    margin-bottom: 20px;
+    outline: none;
+    padding-left: 20px;
+    border-radius: 7px;
+    background-color: rgb(230, 230, 243);
+    color: rgb(6, 8, 117);
+}
+
+.layout main .doctor .adddoctor form button:hover{
+    background-color: rgb(14, 102, 48);
+    color: rgb(255, 255, 255);
+}
+
+
+.layout main .doctor .listdoctor{
+    width: 95%;
+    height: 88%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+
+}
+.layout main .doctor .listdoctor .tabledoctor{
+    width: 100%;
+    height: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+.layout main .doctor .listdoctor table{
+     
+    width: 96%;
+    height: auto;
+}
+.layout main .doctor .listdoctor .paginate{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+
+
+
+
+.layout main .medicament{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    height: 84%;
+    background-color: rgb(34, 21, 56,0.9);
+    border-radius: 5px;
+    margin-top: 20px;
+   display: none;
+}
+
+.layout main .medicament .btnmedicament{
+    width: 100%;
+    display: flex;
+    height: 60px ;
+    align-items: center;
+}
+
+.layout main .medicament .btnmedicament button{
+    width: 30%;
+    height: 40px ;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(10,10,91);
+    margin-left: 20px;
+    
+}
+
+.layout main .medicament .btnmedicament button i{
+    margin-right: 10px;
+}
+
+.layout main .medicament .search{
+    width: 70%;
+    height: 40px ;
+    margin-left: 20px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    color: rgba(10,10,91,1);
+}
+.layout main .medicament .search input{
+    width: 100%;
+    padding-left: 33px;
+    outline: none;
+    border-radius: 7px;
+}
+.layout main .medicament .search i{
+    position: absolute;
+    font-size: 20px;
+    top: 8px;
+    left: 10px;
+    
+}
+
+
+.layout main .medicament .addmedicament{
+    width: 100%;
+    height:80% ;
+    margin-top: 10px;
+    display: none;
+}
+
+.layout main .medicament .addmedicament form{
+    width: 100%;
+    height:100% ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.layout main .medicament .addmedicament form input{
+    width: 80%;
+    height:50px ;
+    margin-bottom: 20px;
+    outline: none;
+    padding-left: 20px;
+    border-radius: 7px;
+}
+
+
+.layout main .medicament .addmedicament form button{
+    width: 270px;
+    height:50px ;
+    font-size: 20px;
+    margin-bottom: 20px;
+    outline: none;
+    padding-left: 20px;
+    border-radius: 7px;
+    background-color: rgb(230, 230, 243);
+    color: rgb(6, 8, 117);
+}
+
+.layout main .medicament .addmedicament form button:hover{
+    background-color: rgb(14, 102, 48);
+    color: rgb(255, 255, 255);
+}
+
+
+
+.layout main .medicament .listmedicament{
+    width: 95%;
+    height: 88%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+
+}
+.layout main .medicament .listmedicament .tablemedicament{
+    width: 100%;
+    height: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+.layout main .medicament .listmedicament .tablemedicament table{
+     
+    width: 96%;
+    height: auto;
+}
+.layout main .medicament  .listmedicament .paginate{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+
+
+.layout main .Consultaion{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    height: 84%;
+    background-color: rgb(34, 21, 56,0.9);
+    border-radius: 5px;
+    margin-top: 20px;
+   display: none;
+}
+
+.layout main .Consultaion .btnConsultaion{
+    width: 100%;
+    display: flex;
+    height: 60px ;
+    align-items: center;
+}
+
+.layout main .Consultaion .btnConsultaion button{
+    width: 30%;
+    height: 40px ;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(10,10,91);
+    margin-left: 20px;
+    
+}
+
+.layout main .Consultaion .btnConsultaion button i{
+    margin-right: 10px;
+}
+
+.layout main .Consultaion .search{
+    width: 70%;
+    height: 40px ;
+    margin-left: 20px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    color: rgba(10,10,91,1);
+}
+.layout main .Consultaion .search input{
+    width: 100%;
+    padding-left: 33px;
+    outline: none;
+    border-radius: 7px;
+}
+.layout main .Consultaion .search i{
+    position: absolute;
+    font-size: 20px;
+    top: 8px;
+    left: 10px;
+    
+}
+
+
+.layout main .Consultaion .addConsultaion{
+    width: 100%;
+    height:80% ;
+    margin-top: 10px;
+    display: none;
+}
+
+.layout main .Consultaion .addConsultaion form{
+    width: 100%;
+    height:100% ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.layout main .Consultaion .addConsultaion form input{
+    width: 80%;
+    height:50px ;
+    margin-bottom: 20px;
+    outline: none;
+    padding-left: 20px;
+    border-radius: 7px;
+}
+
+
+.layout main .Consultaion .addConsultaion form button{
+    width: 270px;
+    height:50px ;
+    font-size: 20px;
+    margin-bottom: 20px;
+    outline: none;
+    padding-left: 20px;
+    border-radius: 7px;
+    background-color: rgb(230, 230, 243);
+    color: rgb(6, 8, 117);
+}
+
+.layout main .Consultaion .addConsultaion form button:hover{
+    background-color: rgb(14, 102, 48);
+    color: rgb(255, 255, 255);
+}
+
+
+
+.layout main .Consultaion .listConsultaion{
+    width: 95%;
+    height: 88%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+
+}
+.layout main .Consultaion .listConsultaion .tableConsultaion{
+    width: 100%;
+    height: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+.layout main .Consultaion .listConsultaion .tableConsultaion table{
+     
+    width: 96%;
+    height: auto;
+}
+.layout main .Consultaion  .listConsultaion .paginate{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+
+
+
+
+.layout main .patient{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    height: 84%;
+    background-color: rgb(34, 21, 56,0.9);
+    border-radius: 5px;
+    margin-top: 20px;
+   display: none;
+}
+
+.layout main .patient .btnpatient{
+    width: 100%;
+    display: flex;
+    height: 60px ;
+    align-items: center;
+}
+
+.layout main .patient .btnpatient button{
+    width: 30%;
+    height: 40px ;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(10,10,91);
+    margin-left: 20px;
+    
+}
+
+.layout main .patient .btnpatient button i{
+    margin-right: 10px;
+}
+
+.layout main .patient .search{
+    width: 70%;
+    height: 40px ;
+    margin-left: 20px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    color: rgba(10,10,91,1);
+}
+.layout main .patient .search input{
+    width: 100%;
+    padding-left: 33px;
+    outline: none;
+    border-radius: 7px;
+}
+.layout main .patient .search i{
+    position: absolute;
+    font-size: 20px;
+    top: 8px;
+    left: 10px;
+    
+}
+
+
+.layout main .patient .addpatient{
+    width: 100%;
+    height:80% ;
+    margin-top: 10px;
+    display: none;
+}
+
+.layout main .patient .addpatient form{
+    width: 100%;
+    height:100% ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.layout main .patient .addpatient form input{
+    width: 80%;
+    height:50px ;
+    margin-bottom: 20px;
+    outline: none;
+    padding-left: 20px;
+    border-radius: 7px;
+}
+
+
+.layout main .patient .addpatient form button{
+    width: 270px;
+    height:50px ;
+    font-size: 20px;
+    margin-bottom: 20px;
+    outline: none;
+    padding-left: 20px;
+    border-radius: 7px;
+    background-color: rgb(230, 230, 243);
+    color: rgb(6, 8, 117);
+}
+
+.layout main .patient .addpatient form button:hover{
+    background-color: rgb(14, 102, 48);
+    color: rgb(255, 255, 255);
+}
+
+
+
+.layout main .patient .listpatient{
+    width: 95%;
+    height: 88%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+
+}
+.layout main .patient .listpatient .tablepatient{
+    width: 100%;
+    height: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+.layout main .patient .listpatient .tablepatient table{
+     
+    width: 96%;
+    height: auto;
+}
+.layout main .patient  .listpatient .paginate{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+
+
+
+.annimateremove{
+    animation-name: annimateremove;
+    animation-duration: 1s;
+}
+
+@keyframes annimateremove {
+    0%   {
+        opacity: 0.9;
+        transform: rotateX(30deg);
+    }
+    25%  {
+        opacity: 0.6;
+        transform: rotateX(60deg);
+    }
+    50%  {
+        opacity: 0.2;
+        transform: rotateX(120deg);
+    }
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+
+.annimateadd{
+    animation-name: annimateadd;
+    animation-duration: 1s;
+}
+
+@keyframes annimateadd {
+    0%   {
+        opacity: 0.3;
+        display: inline-block;
+        
+    }
+    25%  {
+        opacity: 0.6;
+        transform: rotateX(40deg);
+    }
+    50%  {
+        opacity: 0.9;
+        transform: rotateX(100deg);
+       
+    }
+    100% {
+        opacity: 1;
+        transform: rotateX(360deg);
+    }
+}
+
+
+
+
+
+table tr td button{
+    width: 33px;
+    height: 30px;
+    margin-left: 7px;
+    background-color: rgb(151, 19, 122);
+    color: #FFF;
+    font-size: 14px;
+    border: none;
+}
+
+
+@media(max-width:900px){
+.layout main{
+    width: 100%;
+}
+
+.layout nav{
+    position: absolute;
+    left: -100%;
+    top: 80px;
+    z-index: 100;
+    width: 100%;
+    opacity: 0.9;
+    transition: 1s;
+    background: rgb(10,10,91);
+    background: linear-gradient(90deg, rgba(10,10,91,1) 0%, rgba(92,115,204,1) 0%, rgba(121,139,195,1) 0%, rgba(130,144,201,1) 93%, rgba(183,188,207,1) 97%, rgba(255,255,255,1) 100%, rgba(66,60,246,1) 100%, rgba(31,47,162,1) 100%);
+}
+
+.layout nav ul li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.layout nav.show{
+    position: fixed;
+    left: 0;
+    top: 80px;
+}
+
+.layout main .doctor .btndoctor button{
+    width: 90px;
+    height: 40px ;
+    margin-left: 10px;
+}
+
+
+.layout main .doctor .search{
+    width: 150px;
+    height: 40px ;
+    margin-left: 10px;
+    margin-right: 5px;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    color: rgba(10,10,91,1);
+}
+
+table tr td button{
+    width: 24px;
+    height: 30px;
+    margin-left: 2px;
+    background-color: rgb(151, 19, 122);
+    color: #FFF;
+    font-size: 14px;
+    border: none;
+}
+
+
+
+}
+
+
+
+/*style for table */
+
+
+th{
+    text-align: center;
+    height: 50px;
+    color: #FFF;
+}
+
+
+
+tr:not(.nothover){
+    width: 100%;
+    height: 40px;
+    cursor: pointer; 
+}
+tr:hover:not(.nothover){
+
+  background-color: rgb(88, 165, 175);
+ 
+}
+td{
+    height: 50px;
+    text-align: center;
+    color: #FFF;
+}
+
+td button a {
+	color: #fff;
+}
+/*style for table */
