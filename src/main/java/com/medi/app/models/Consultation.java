@@ -21,15 +21,15 @@ public class Consultation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id ;
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "idMedcin")
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Medecin medecin;
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "idPatient")
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Patient patient;
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "idMedicament")
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Medicament medicament;

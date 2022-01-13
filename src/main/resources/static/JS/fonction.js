@@ -184,6 +184,34 @@ function save1(){
 					});
  
 }
-
+function savec(){
+	$.ajax({
+			url:"/savecons",
+			success :swal({
+  title: "Good job!",
+  text: "consultation was added",
+  icon: "success",
+  button: "ok",
+  
+}).then((ok)=>{
+		    	if(ok){
+		    		location.href="/listercon";
+		    	}
+		    }),
+		 erreur :swal({
+			title: "Good job!",
+  text: "consultation has added",
+  icon: "success",
+  button: "ok",
+			  
+			}).then((ok)=>{
+					    	if(ok){
+					    		location.href="/listercon";
+					    	}
+					    }),
+						
+					});
+	
+}
 
 

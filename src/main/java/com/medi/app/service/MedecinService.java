@@ -28,7 +28,12 @@ public class MedecinService implements ImedecinService {
 		}
 		return res;
 	}
-
+	@Override
+	public void savem(Medecin m) {
+		
+		im.save(m);
+	
+	}
 	@Override
 	public Optional<Medecin> findmedbyid(int id) {
 	

@@ -4,67 +4,53 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+   	<link rel="stylesheet"  th:href="@{/CSS/bootstrap.min.css}">
+   	<link rel="stylesheet"  th:href="@{/CSS/all.min.css}">
     <link rel="stylesheet"  th:href="@{/CSS/dashboard.css}">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
-  
-<script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-    <title>Documenst</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <title>HOME</title>
 </head>
 <body>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <div class="layout">
-
     <nav>
-
       <div class="picture">
         <img id="idpicture" th:src="@{/IMAGES/logo-removebg-preview.png}" alt="">
       </div>
-
       <ul>
-
         <li id="idhome"><i class="fas fa-home"></i><span>Home</span></li>
         <li id="iddoctor"><a class="clickme" onclick="history.go(0)"  th:href="@{/lister} "><i class="fas fa-user-md"></i><span>Doctor</span></a></li>
         <li id="idmedicament"><a class="clickme" onclick="history.go(0)"  th:href="@{/listermedic} "><i class="fas fa-notes-medical"></i><span>Medicament</span></a></li>
         <li id="idconsultaion"><a class="clickme" th:href="@{/listercon}"><i class="fas fa-book-medical"></i><span>Consultaion</span></a></li>
         <li id="idpatient"><a class="clickme" th:href="@{/listerpa}"><i class="fas fa-procedures"></i><span>Patients</span></a></li>
-        
-
       </ul>
-
     </nav>
-      
-      
     <main>
-
       <header>
         <span><i class="fa fa-bars" id="bars"></i></span>
-
         <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
             Account
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" id="idsettings">settings</a>
-            <form class="dropdown-item" th:action="@{/logout}" method="post">
-		        <input type="submit" id="idlogout" value="Logout" />
-		    </form>
+            <a class="dropdown-item" href="#">login</a>
+            <form th:action="@{/logout}"  method="post">
+            	<input type="submit" class="dropdown-item" value="logout" id="mybtn"/>
+            </form>
           </div>
         </div>
       </header>
       <div class="chart">
         <canvas id="chart"></canvas>
       </div>
-
       <div class="doctor">
-
         <div class="btndoctor">
           <button id="adddoctor"> <i class="fas fa-plus"></i> New </button>
           <button id="seedoctor"> <i class="fas fa-eye"></i> All</button>
           <div class="search"><i class="fas fa-search"></i> <input type="text" id="searchinput" placeholder="Searche for doctor"></div>
         </div>
-
         <div class="adddoctor">
           <form th:action="@{/saveme}" th:object=${medecin1} method="POST">
             <input th:field="*{nom}" type="text" name="mname" placeholder="Nom" />
@@ -80,9 +66,7 @@
             <button onclick="save()" type="submit">Enregistrer</button>
           </form>
         </div>
-
         <div class="listdoctor">
-
           <div class="tabledoctor">
             <table id="table">
             <thead>
@@ -96,7 +80,6 @@
               </tr>
             </thead>
           <tbody>
-              
               <tr th:each="medecin:${medecin}">
                 <td id="ios" th:text="${medecin.id}" hidden></td>
                 <td th:text="${medecin.nom}"></td>
@@ -107,7 +90,6 @@
                   <button class="medd1" id='cvc'>
                   <a class ="ook"  th:href="${medecin.id}"><i class="fas fa-eye"></i></a>
                   </button>
-                
                   <button class="medd" type="button">
                   <a class="ooo"th:href="@{findone/(id=${medecin.id})}"><i class="fas fa-edit"></i></a>
                   </button>
@@ -116,11 +98,9 @@
                 </button>
                 </td>
               </tr>
-          </tbody>
-              
+          </tbody> 
           </table>
          </div>
-
           <div class="paginate" aria-label="Page navigation example">
             <ul class="pagination">
               <li class="page-item"><a class="page-link" href="#">Previous</a></li>
@@ -130,28 +110,14 @@
               <li class="page-item"><a class="page-link" href="#">Next</a></li>
             </ul>
           </div>
-
         </div>
-
       </div>
-       
-
-      
-
-
-
-
-
-
-      
       <div class="medicament">
-
         <div class="btnmedicament">
           <button id="addmedicament"> <i class="fas fa-plus"></i> New </button>
           <button id="seemedicament"> <i class="fas fa-eye"></i> All</button>
           <div class="search"><i class="fas fa-search"></i> <input type="text" id="searchmedicament" placeholder="Searche for doctor"></div>
         </div>
-
         <div class="addmedicament">
             <form th:action="@{/savemed}" th:object=${medicament1} method="POST">
             <input th:field="*{nom}" type="text" name="mname" placeholder="Nom" />
@@ -160,9 +126,7 @@
             <button onclick="save2()" type="submit">Enregistrer</button>
           </form>
         </div>
-
         <div class="listmedicament">
-
          <div class="tablemedicament">
               <table id="tablemedicament">
                 <tr>
@@ -172,7 +136,7 @@
                   <th>action</th>
                 </tr>
                   <tbody>
-              
+
               <tr th:each="medicament:${medicament}">
                 <td th:text="${medicament.nom}"></td>
                 <td th:text="${medicament.laboratoire}"></td>
@@ -228,30 +192,30 @@
           <form  th:action="@{/savecons}" th:object=${consultation1} method="POST">
            <div class="form-group col-md-5">
                       <label for="inputState" class="x">Medecin</label>
-             <select id="cp" name="cp" class="form-control">
+             <select id="cp" name="idm" class="form-control">
                       
                       </select>
            </div>
             <div class="form-group col-md-5">
                       <label for="inputState"class="x">Patient</label>
-                       <select id="cd" name="cd" class="form-control">
+                       <select id="cd" name="idp" class="form-control">
                       
                       </select>
             </div>
              <div class="form-group col-md-5">
                       <label for="inputState" class="x">Medicament</label>
-                       <select id="cs" name="cs" class="form-control">
+                       <select id="cs" name="idmedi" class="form-control">
                       
                       </select>
              </div>
-            <button type="submit">Enregistrer</button>
+            <button onclick="savec()" type="submit">Enregistrer</button>
           </form>
         </div>
  <style>
-	 .x{
-		color:white;
-		font-family:italic;
-	}
+ .x{
+	color:white;
+	fontfamily:italic;
+}
  </style>
         <div class="listConsultaion">
 
@@ -259,17 +223,18 @@
               <table id="tableConsultaion">
                 <tr>
                   <th>Nom doctor </th>
+                   <th>medicament</th>
                   <th>nom patient</th>
-                  <th>medicament</th>
-                  <th>action</th>
+                 <th>action</th>
                 </tr>
                 <tbody>
                    <tr th:each="consultation:${consultation}">
-                <td th:text="${consultation.id_medcin}"></td>
-                <td th:text="${consultation.id_medicament}"></td>
-                <td th:text="${consultation.id_patient}"></td>
-                 
-              
+                <td th:text="${consultation.medecin.nom}+' '+${consultation.medecin.prenom}"></td>
+                <td th:text="${consultation.medicament.nom}"></td>
+                <td th:text="${consultation.patient.nom}+' '+${consultation.patient.prenom}"></td>
+                  <td> 
+                  <button type="button"> <a th:href="@{pdf/generate/(id=${consultation.id})}"><i class="fas fa-file-pdf"></i></a></button>
+                  </td>
                 </tr></tbody>
 
                 
@@ -634,7 +599,7 @@
         </button>
       </div>
       <div class="modal-body">
-       <form class="myform"  th:action="@{/saveme}"  method="POST">
+       <form class="myform"  th:action="@{/same}"  method="POST">
   			 <div class="form-row">
     <div class="col">
             <input  type="text" id="name1"  />
@@ -723,31 +688,15 @@ input[name=t] {
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script th:src="@{/JS/jquery-3.6.0.min.js}"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-<script th:src="@{/JS/dashboard.js}"></script>
-<script th:src="@{/JS/fonction.js}"></script>
-<script th:src="@{/JS/main.js}"></script>
-<script th:src="@{/JS/tb.js}"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script th:src="@{/JS/jquery-3.6.0.min.js}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script th:src="@{/JS/all.min.js}"></script>
+	<script th:src="@{/JS/bootstrap.bundle.min.js}"></script>
+	<script th:src="@{/JS/dashboard.js}"></script>
+	<script th:src="@{/JS/fonction.js}"></script>
+	<script th:src="@{/JS/main.js}"></script>
+	<script th:src="@{/JS/tb.js}"></script>
 </body>
 </html>

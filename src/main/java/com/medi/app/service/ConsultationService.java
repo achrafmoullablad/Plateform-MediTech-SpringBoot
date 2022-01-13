@@ -33,9 +33,11 @@ public class ConsultationService implements IconsultationService{
 	}
 
 	@Override
-	public Optional<Consultation> findmedbyid(int id) {
+	public Consultation findconbyid(int id) {
 		// TODO Auto-generated method stub
-		return im.findById(id);
+		return im.findById(id).get();
 	}
+
+	
 
 }

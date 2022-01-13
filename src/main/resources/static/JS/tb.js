@@ -10,7 +10,7 @@ $(document).ready(function() {
              $select.find('option').remove();
 
              $.each(data, function (key, value) {
-               $select.append(`<option  value=${value.id}>${value.nom} ${value.prenom}</option>`);
+               $select.append(`<option name="idm" value=${value.id}>${value.nom} ${value.prenom}</option>`);
                
             });
         }
@@ -33,7 +33,7 @@ $(document).ready(function() {
              $select.find('option').remove();
 
              $.each(data, function (key, value) {
-               $select.append(`<option  value=${value.id}>${value.nom} ${value.prenom}</option>`);
+               $select.append(`<option name="idp" value=${value.id}>${value.nom} ${value.prenom}</option>`);
                
             });
         }
@@ -56,7 +56,7 @@ $(document).ready(function() {
              $select.find('option').remove();
 
              $.each(data, function (key, value) {
-               $select.append(`<option value=${value.id}>${value.nom}</option>`);
+               $select.append(`<option name="idmedi" value=${value.id}>${value.nom}</option>`);
                
             });
         }

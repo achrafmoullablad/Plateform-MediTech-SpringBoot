@@ -49,6 +49,11 @@ public class MedController {
 		service.save(m);
 		return "redirect:/lister";
 	}
+	@PostMapping("/same")
+	public String savem(@Valid Medecin m, Model model) {
+		service.savem(m);
+		return "redirect:/lister";
+	}
 	@GetMapping("/sup/{id}")
 	public String delete(Model model,@PathVariable int id) {
 		service.delete(id);
