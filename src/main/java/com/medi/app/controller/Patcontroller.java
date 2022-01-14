@@ -1,10 +1,6 @@
 package com.medi.app.controller;
-
 import java.util.List;
-import java.util.Optional;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-
+import org.springframework.web.servlet.ModelAndView;
 import com.medi.app.interfaceServices.IpatientService;
 import com.medi.app.models.Medecin;
 import com.medi.app.models.Medicament;
@@ -26,7 +21,6 @@ public class Patcontroller {
 	
 	@Autowired
 	private IpatientService service1;
-	private MedController mer;
 	@GetMapping("/listerpa")
 	public String listerp(Model model) {
 		 List<Patient> p1 =service1.ListerPatient();
@@ -55,12 +49,17 @@ public class Patcontroller {
 	public String deletep(Model model,@PathVariable int id) {
 		service1.delete(id);
 		return "redirect:/listerpa";
-		
-		
 	}
+	@RequestMapping("/editpatient/{id}")
+    public ModelAndView editPatient(@PathVariable(name = "id") int id) {
+        ModelAndView mav = new ModelAndView("listerpa");
+        Patient p=service1.findmpatbyid(id);
+        mav.addObject("patient", p);
+        return mav;
+    }
 	@GetMapping("/findp")
 	@ResponseBody
-	public Optional<Patient> findonep(int id) {
+	public Patient findonep(int id) {
 		return service1.findmpatbyid(id);
 		
 	}

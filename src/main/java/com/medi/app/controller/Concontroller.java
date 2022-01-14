@@ -62,7 +62,7 @@ public class Concontroller {
 
 	public String save(@Valid Consultation c, Model model,@RequestParam int idp,@RequestParam int idm,@RequestParam int idmedi) {
 		Medecin med =service1.findmedbyid(idm).get();
-		Patient pat = service2.findmpatbyid(idp).get();
+		Patient pat = service2.findmpatbyid(idp);
 		Medicament medi =servic3.findmedbyid(idmedi).get();
 		c.setMedecin(med);
 		Date date = new Date(); // This object contains the current date value

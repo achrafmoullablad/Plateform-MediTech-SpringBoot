@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   	<link rel="stylesheet"  th:href="@{/CSS/bootstrap.min.css}">
-   	<link rel="stylesheet"  th:href="@{/CSS/all.min.css}">
-    <link rel="stylesheet"  th:href="@{/CSS/dashboard.css}">
+   	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+	<link rel="stylesheet"  th:href="@{/CSS/dashboard.css}">
     <title>HOME</title>
 </head>
 <body>
@@ -556,26 +556,26 @@
       <div class="modal-body">
        <form class="myform"  th:action="@{/savepa}"  method="POST">
   			 <div class="form-row">
-    <div class="col">
-            <input  type="text" id="name2"  />
-    </div>
-    <div class="col">
-            <input  type="text" id="prenom2" />
-  			 </div>
-  			 </div>
-  			  <div class="form-row">
-    <div class="col">
-            <input type="text" id="adr2"  />
-    </div>
-    <div class="col">
-            <input type="text" id="tel2" />
-  			  </div>
-  			  </div>
-  			   <div class="form-row">
-    <div class="col">
-             <input  type="email" id="em2"/>
-    </div>
-      </div>
+		    <div class="col">
+		            <input  type="text" id="name2"  />
+		    </div>
+		    <div class="col">
+		            <input  type="text" id="prenom2" />
+		  			 </div>
+		  			 </div>
+		  			  <div class="form-row">
+		    <div class="col">
+		            <input type="text" id="adr2"  />
+		    </div>
+		    <div class="col">
+		            <input type="text" id="tel2" />
+		  			  </div>
+		  			  </div>
+		  			   <div class="form-row">
+		    <div class="col">
+		             <input  type="email" id="em2"/>
+		    </div>
+		      </div>
   			 
           </form>
       </div>
@@ -601,26 +601,26 @@
       <div class="modal-body">
        <form class="myform"  th:action="@{/same}"  method="POST">
   			 <div class="form-row">
-    <div class="col">
-            <input  type="text" id="name1"  />
-    </div>
-    <div class="col">
-            <input  type="text" id="prenom1" />
-  			 </div>
-  			 </div>
-  			  <div class="form-row">
-    <div class="col">
-            <input type="text" id="adr1"  />
-    </div>
-    <div class="col">
-            <input type="text" id="tel1" />
-  			  </div>
-  			  </div>
-  			   <div class="form-row">
-    <div class="col">
-             <input  type="email" id="em1"/>
-    </div>
-    <div class="col">
+			    <div class="col">
+			            <input  type="text" id="name1"  />
+			    </div>
+			    <div class="col">
+			            <input  type="text" id="prenom1" />
+			  			 </div>
+			  			 </div>
+			  			  <div class="form-row">
+			    <div class="col">
+			            <input type="text" id="adr1"  />
+			    </div>
+			    <div class="col">
+			            <input type="text" id="tel1" />
+			  			  </div>
+			  			  </div>
+			  			   <div class="form-row">
+			    <div class="col">
+			             <input  type="email" id="em1"/>
+			    </div>
+			    <div class="col">
               <!--<input hi type="password" name="passw" placeholder="password" />-->
 	            <select  id="h1">
 	              <option value="disponible">disponible</option>
@@ -692,8 +692,9 @@ input[name=t] {
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
 	<script th:src="@{/JS/jquery-3.6.0.min.js}"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	<script th:src="@{/JS/all.min.js}"></script>
-	<script th:src="@{/JS/bootstrap.bundle.min.js}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 	<script th:src="@{/JS/dashboard.js}"></script>
 	<script th:src="@{/JS/fonction.js}"></script>
 	<script th:src="@{/JS/main.js}"></script>

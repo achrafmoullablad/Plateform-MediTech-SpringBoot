@@ -1,7 +1,6 @@
 package com.medi.app.service;
 
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.medi.app.inerfaces.IPatient;
@@ -15,13 +14,11 @@ public class PatientService implements IpatientService {
 	private IPatient im;
 	@Override
 	public List<Patient> ListerPatient() {
-		// TODO Auto-generated method stub
 		return (List<Patient>)im.findAll();
 	}
 
 	@Override
 	public int save(Patient p) {
-		// TODO Auto-generated method stub
 		int res =0;
 		Patient patient =im.save(p);
 		if(!patient.equals(null)) {
@@ -31,16 +28,13 @@ public class PatientService implements IpatientService {
 	}
 
 	@Override
-	public Optional<Patient> findmpatbyid(int id) {
-		// TODO Auto-generated method stub
-		return im.findById(id);
+	public Patient findmpatbyid(int id) {
+		return im.findById(id).get();	
 	}
 
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
 		im.deleteById(id);
-		
 	}
 	
 
