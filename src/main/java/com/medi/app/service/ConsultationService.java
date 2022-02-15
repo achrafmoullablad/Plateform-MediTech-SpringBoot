@@ -38,6 +38,4 @@ public class ConsultationService implements IconsultationService{
 		return im.findById(id).get();
 	}
 
-	
-
 }

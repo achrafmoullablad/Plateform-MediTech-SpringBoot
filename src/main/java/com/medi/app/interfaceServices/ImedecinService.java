@@ -10,5 +10,4 @@ public interface ImedecinService {
 	public void savem(Medecin m);
 	public  Optional<Medecin> findmedbyid(int id);
 	public void delete(int id);
-	
 }
